@@ -24,6 +24,10 @@ type Topic struct {
 	TopicNumericValue 	int
 }
 
+func (t Topic) String() string {
+	return fmt.Sprintf("topic-name(%s)", t.TopicName)
+}
+
 func NewTopic(val interface{}) (Topic, error) {
 	switch val.(type) {
 	case int:

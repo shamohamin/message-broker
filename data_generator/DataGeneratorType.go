@@ -23,16 +23,16 @@ type DataGenerator struct {
 }
 
 func (generator *DataGenerator) Generate() float32 {
-	if generating.FuncExc == nil {
-		generating.FuncExc = X2
+	if generator.FuncExc == nil {
+		generator.FuncExc = X2
 	}
 
-	if generating.Step == float32(0) {
-		generating.Step = float32(1)
+	if generator.Step == float32(0) {
+		generator.Step = float32(1)
 	}
 
-	retVal := generating.FuncExc(generating.InitialValueX)
-	generating.InitialValueX += generating.Step
+	retVal := generator.FuncExc(generator.InitialValueX)
+	generator.InitialValueX += generator.Step
 
 	return retVal
 }

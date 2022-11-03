@@ -11,23 +11,30 @@ func NewMessageQueue(sizeQ int) *MessageQueue {
 	return &MessageQueue{
 		messages: make([]*Message, sizeQ),
 		index: 0,
-		size: sizeQ
+		size: sizeQ,
 	}
 }
 
 
 func (qu *MessageQueue) Enqueue(msg *Message) {
-	if index >= qu.size - 1 {
-		// removing the last element
-		qu.messages = qu.messages[:qu.index]
+	if qu.index >= qu.size {
+		// overiding the first element
+		// first element is the oldest one
+		qu.messages[0] = msg
+		return
 	}
-	qu.index++ 
+	
 	qu.messages[qu.index] = msg
+	qu.index++ 
 } 
 
 func (qu *MessageQueue) Dequeue() *Message {
+	if qu.index == 0 {
+		return nil
+	}
 	msg := qu.messages[0]
-	msg.index--
+	qu.index--
 	qu.messages = qu.messages[1:]
+	qu.messages = append(qu.messages, nil)
 	return msg
 }

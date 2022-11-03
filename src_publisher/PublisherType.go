@@ -39,7 +39,7 @@ func (pub *Publisher) Execution() {
 			time.Sleep(500 * time.Millisecond) // sleeping
 			// generating data
 			data := pub.DataGen.Generate()
-			strData := fmt.Sprintf("data-publisher-ID(%d)--(%0.6f)", pub.ID, data)
+			strData := fmt.Sprintf("data-publisher-ID(%d)-topic(%q)--(%0.6f)", pub.ID, pub.PubTopic, data)
 			pub.InputChan <- msg.Message{
 				Topic: pub.PubTopic,
 				Content: strData,
